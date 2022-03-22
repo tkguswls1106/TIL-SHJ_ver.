@@ -1,0 +1,57 @@
+#define _CRT_SECURE_NO_WARNINGS
+#define MAX_TERMS 101
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+
+typedef struct {
+	int coef;
+	int expon;
+} polynomial;
+
+int eval(polynomial P, int x)
+{
+	int hamsu = P.coef * pow(x, P.expon);
+	return hamsu;
+}
+
+int main(void)
+{
+	int As = 0, Ae;  // 인덱스명으로 지정
+
+	polynomial terms[MAX_TERMS];
+
+	printf("다항식의 항을 몇 개 입력받을것인가?: ");
+	scanf("%d", &Ae);  // 예를들어 3 입력
+	Ae = Ae - 1;  // Aend 인덱스는 2
+
+
+	printf("다항식의 각 항의 계수와 차수를 차례로 번갈아가며 입력하시오:\n");
+	for (int i = 0; i <= Ae; i++)  // 0~2 인덱스 포문
+	{
+		printf("각 항의 {계수, 차수}: ");
+		scanf("%d %d", &terms[i].coef, &terms[i].expon);
+	}
+
+	printf("다항식 출력: ");
+	for (int i = As; i < Ae; i++)
+		printf("%dx^%d + ", terms[i].coef, terms[i].expon);
+	printf("%dx^%d\n", terms[Ae].coef, terms[Ae].expon);
+
+	printf("\n");
+
+	printf("\nA(x) 함수에 대입할 x값을 입력하시오: ");
+	int x;
+	scanf("%d", &x);
+
+	int sum = 0;
+	for (int i = As; i <= Ae; i++)
+	{
+		sum += eval(terms[i], x);
+	}
+
+	printf("A(%d) = %d\n", x, sum);
+
+	return 0;
+}

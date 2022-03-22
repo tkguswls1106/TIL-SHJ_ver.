@@ -1,0 +1,53 @@
+#include <stdio.h>
+#include <math.h>
+#define MAX(a,b) (((a)>(b))?(a):(b))
+#define MAX_DEGREE 101
+#define _CRT_SECURE_NO_WARNINGS
+
+typedef struct { // 다항식 구조체 타입 선언
+int degree; // 다항식의 차수
+float coef[MAX_DEGREE]; // 다항식의 계수
+} polynomial;
+
+void print_poly(polynomial p)
+{
+	for (int i = p.degree; i > 0; i--)
+		printf("%3.1fx^%d + ", p.coef[p.degree - i], i);
+
+	printf("%3.1f \n", p.coef[p.degree]);
+}
+
+int eval(polynomial P, int x)
+{
+	int hamsu = 0;
+	int chasu = P.degree;
+	for (int i = 0; i <= P.degree; i++)
+	{
+		hamsu += P.coef[i] * pow(x, chasu);
+		chasu--;
+	}
+	
+	return hamsu;
+}
+
+int main(void)
+{
+	polynomial a;
+
+	printf("<다항식 입력>\n");
+	printf("다항식의 최고 차수: ");
+	scanf_s("%d", &a.degree);
+	printf("각 항의 계수를 차례로 입력 : ");
+	for (int i = 0; i <= a.degree; i++)
+		scanf_s("%f", &a.coef[i]);
+	printf("다항식 출력: A(x) = ");
+	print_poly(a);
+
+	printf("\n\nA(x) 함수에 대입할 x값을 입력하시오: ");
+	int x;
+	scanf("%d", &x);
+	
+	printf("A(%d) = %d\n", x, eval(a, x));
+
+	return 0;
+}

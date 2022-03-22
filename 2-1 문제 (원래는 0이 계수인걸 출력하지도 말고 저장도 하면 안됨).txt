@@ -1,0 +1,141 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MAX_TERMS 101
+
+typedef struct {
+	int coef;
+	int expon;
+} polynomial;
+
+polynomial terms[MAX_TERMS];
+
+int avail = 0;
+
+char compare(int a, int b)
+{
+	if (a > b) return '>';
+	else if (a == b) return '=';
+	else return '<';
+}
+
+void attach(int coef, int expon)  // 새로운 항을 다항식에 추가한다.
+{
+	if (avail > MAX_TERMS)
+	{
+		fprintf(stderr, "항의 개수가 너무 많음\n");
+		exit(1);
+	}
+
+	terms[avail].coef = coef;
+	terms[avail].expon = expon;
+
+	avail++;
+}
+
+void poly_minus(int As, int Ae, int Bs, int Be, int *Cs, int *Ce)  // C = A + B
+{
+	int tempcoef;
+
+
+	avail = *Cs;
+	while (As <= Ae && Bs <= Be)
+		switch (compare(terms[As].expon, terms[Bs].expon))
+		{
+
+		case '>': // A의 차수 > B의 차수
+			attach(terms[As].coef, terms[As].expon);
+			As++;
+
+
+			break;
+
+		case '=': // A의 차수 == B의 차수
+			tempcoef = terms[As].coef - terms[Bs].coef;
+
+			if (tempcoef)
+				attach(tempcoef, terms[As].expon);
+			As++;
+			Bs++;
+
+			break;
+
+		case '<': // A의 차수 < B의 차수
+			attach(-1 * terms[Bs].coef, terms[Bs].expon);
+			Bs++;
+
+			break;
+
+		}
+
+	for (; As <= Ae; As++)  // A의 나머지 항들을 이동함
+		attach(terms[As].coef, terms[As].expon);
+
+	for (; Bs <= Be; Bs++)  // B의 나머지 항들을 이동함
+		attach(-1 * terms[Bs].coef, terms[Bs].expon);
+
+	*Ce = avail - 1;
+}
+
+void print_poly(int s, int e)
+{
+	for (int i = s; i < e; i++)
+		printf("%dx^%d + ", terms[i].coef, terms[i].expon);
+	printf("%dx^%d\n", terms[e].coef, terms[e].expon);
+}
+
+int main(void)
+{
+	int As = 0, Ae, Bs, Be, Cs, Ce = 0;  // 인덱스명으로 지정
+
+	printf("<첫번째 다항식>\n");
+	printf("첫번째 다항식의 항을 몇 개 입력받을것인가?: ");
+	scanf("%d", &Ae);  // 예를들어 3 입력
+	Ae = Ae - 1;  // Aend 인덱스는 2
+
+	printf("첫번째 다항식의 각 항의 계수와 차수를 차례로 번갈아가며 입력하시오:\n");
+	for (int i = 0; i <= Ae; i++)  // 0~2 인덱스 포문
+	{
+		printf("각 항의 {계수, 차수}: ");
+		scanf("%d %d", &terms[i].coef, &terms[i].expon);
+	}
+
+	printf("첫번째 다항식 출력: ");
+	print_poly(As, Ae);  // 인덱스를 매개변수로 넣음
+
+	printf("\n");
+
+	printf("<두번째 다항식>\n");
+	printf("두번째 다항식의 항을 몇 개 입력받을것인가?: ");
+	scanf("%d", &Be);  // 예를들어 4 입력
+	Be = Ae + Be;  // Be = 2+4 = 6, Bend 인덱스는 6
+
+	Bs = Ae + 1;  // Bstart 인덱스는 Ae인덱스+1 = 2+1 = 3
+
+	avail = Be + 1;  // avail 인덱스는 6+1=7
+
+	printf("두번째 다항식의 각 항의 계수와 차수를 차례로 번갈아가며 입력하시오:\n");
+	for (int i = Bs; i <= Be; i++)
+	{
+		printf("각 항의 {계수, 차수}: ");
+		scanf("%d %d", &terms[i].coef, &terms[i].expon);
+	}
+
+	printf("두번째 다항식 출력: ");
+	print_poly(Bs, Be);
+
+	printf("\n<두 다항식의 뺄셈>\n");
+	print_poly(As, Ae);
+	print_poly(Bs, Be);
+	printf("----------------------------------------------------------\n");
+	printf("뺄셈 결과: ");
+	Cs = Be + 1;
+	poly_minus(As, Ae, Bs, Be, &Cs, &Ce);
+
+	print_poly(Cs, Ce);
+
+	printf("\n");
+
+	return 0;
+}
