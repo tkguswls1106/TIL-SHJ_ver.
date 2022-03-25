@@ -1,3 +1,6 @@
+자바에서 System.out.println 말고도 System.out.printf 도 사용 가능하다.
+예) System.out.printf("%d %d\n", i, j);
+
 print문은 system.out인데, 반대로 입력하는 scan문은 system.out이 아닌, system.in 이다.
 import java.util.Scanner;
 Scanner in = new Scanner(System.in);
