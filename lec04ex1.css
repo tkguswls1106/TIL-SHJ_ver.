@@ -1,0 +1,16 @@
+/*
+#intro {font-style:italic}
+.term {font-size:30px; font-style:italic; text-decoration:underline}
+h3 { font-style:italic; }
+p { font-size:10pt; font-weight:bold }
+*/
+
+p {font-size: 10pt}
+.red1 {color: red; font-style: italic; } /* red1 클래스는 빨간색 이탤릭으로 */
+strong.red1 {font-size: 12pt } /* strong 요소중 red1 클래스는 12pt 크기 */
+#next { color: blue; text-align: center} /* next 아이디는 파란색 가운데 정렬 */
+
+a:link { color: blue; } /* a태그의 하이퍼링크 */
+a:visited { color: green; } /* 방문한 a태그의 링크 */
+h3:before { content: "◆"; color: blue } /* h3요소의 앞에 파란색 ◆문자 삽입 */
+h3:after { content: " (ⓒsblim)"; font-size:10pt } /* h3요소의 뒤에 콘텐츠 삽입 */
