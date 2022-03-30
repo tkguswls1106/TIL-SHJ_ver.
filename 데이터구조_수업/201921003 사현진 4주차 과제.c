@@ -4,21 +4,21 @@
 
 typedef struct
 {
-	int row;  // Çà 'ÀÎµ¦½º'
-	int col;  // ¿­ 'ÀÎµ¦½º'
-	int value;  // ÇØ´ç ÀÎµ¦½ºÀÇ '°ª'
+	int row;  // í–‰ 'ì¸ë±ìŠ¤'
+	int col;  // ì—´ 'ì¸ë±ìŠ¤'
+	int value;  // í•´ë‹¹ ì¸ë±ìŠ¤ì˜ 'ê°’'
 } element;  // {?, ?, ?}
 
 
 typedef struct SparseMatrix
 {
 	element data[MAX_TERMS];  // {?, ?, ?}
-	int rows;	// ÇàÀÇ '°³¼ö'
-	int cols;	// ¿­ÀÇ '°³¼ö'
-	int terms; 	// Ç×ÀÇ '°³¼ö'
+	int rows;	// í–‰ì˜ 'ê°œìˆ˜'
+	int cols;	// ì—´ì˜ 'ê°œìˆ˜'
+	int terms; 	// í•­ì˜ 'ê°œìˆ˜'
 } SparseMatrix;
 
-SparseMatrix transpose(int a[][10])  // (1) ÀÌÂ÷¿ø ¹è¿­¿¡ ÀúÀåµÈ Èñ¼ÒÇà·ÄÀ» SparseMatrix ±¸Á¶·Î ÀúÀåÇÏ´Â ÇÔ¼ö
+SparseMatrix transpose(int a[][10])  // (1) ì´ì°¨ì› ë°°ì—´ì— ì €ì¥ëœ í¬ì†Œí–‰ë ¬ì„ SparseMatrix êµ¬ì¡°ë¡œ ì €ì¥í•˜ëŠ” í•¨ìˆ˜
 {
 	SparseMatrix b;
 
@@ -31,7 +31,7 @@ SparseMatrix transpose(int a[][10])  // (1) ÀÌÂ÷¿ø ¹è¿­¿¡ ÀúÀåµÈ Èñ¼ÒÇà·ÄÀ» Spar
 	{
 		for (int j = 0; j < 10; j++)
 		{
-			if (a[i][j] != 0)  // Èñ¼ÒÇà·ÄÀÇ °ªÀÌ 0ÀÌ ¾Æ´Ñ°æ¿ì
+			if (a[i][j] != 0)  // í¬ì†Œí–‰ë ¬ì˜ ê°’ì´ 0ì´ ì•„ë‹Œê²½ìš°
 			{
 				b.data[index].row = i;
 				b.data[index].col = j;
@@ -42,19 +42,19 @@ SparseMatrix transpose(int a[][10])  // (1) ÀÌÂ÷¿ø ¹è¿­¿¡ ÀúÀåµÈ Èñ¼ÒÇà·ÄÀ» Spar
 		}
 	}
 
-	b.terms = index;  // 0ºÎÅÍ Á¶°Ç¿¡ ¸Â´Â °³¼ö¸¸Å­ index¸¦ ++ÇØÁÖ¾úÀ¸¹Ç·Î, Ç×ÀÇ '°³¼ö'·Î ³Ö¾îÁÖ´Â°ÍÀÌ ¸Â´Ù.
+	b.terms = index;  // 0ë¶€í„° ì¡°ê±´ì— ë§ëŠ” ê°œìˆ˜ë§Œí¼ indexë¥¼ ++í•´ì£¼ì—ˆìœ¼ë¯€ë¡œ, í•­ì˜ 'ê°œìˆ˜'ë¡œ ë„£ì–´ì£¼ëŠ”ê²ƒì´ ë§ë‹¤.
 
 	return b;
 }
 
-SparseMatrix Matrix_add(SparseMatrix a, SparseMatrix b)  // (2) µÎ °³ÀÇ SparseMatrix¸¦ ¸Å°³º¯¼ö·Î ¹Ş¾Æ¼­ µ¡¼ÀÇÑ °á°ú·Î SparseMatrix¸¦ ¹İÈ¯ÇÏ´Â ÇÔ¼ö
+SparseMatrix Matrix_add(SparseMatrix a, SparseMatrix b)  // (2) ë‘ ê°œì˜ SparseMatrixë¥¼ ë§¤ê°œë³€ìˆ˜ë¡œ ë°›ì•„ì„œ ë§ì…ˆí•œ ê²°ê³¼ë¡œ SparseMatrixë¥¼ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜
 {
 	SparseMatrix c;
 	c.cols = a.cols;
 	c.rows = a.rows;
-	int index1 = 0;  // a Çà·ÄÀ» ´Ù·ê¶§ »ç¿ëÇÒ ÀÎµ¦½º
-	int index2 = 0;  // b Çà·ÄÀ» ´Ù·ê¶§ »ç¿ëÇÒ ÀÎµ¦½º
-	int index3 = 0;  // c Çà·ÄÀ» ´Ù·ê¶§ »ç¿ëÇÒ ÀÎµ¦½º
+	int index1 = 0;  // a í–‰ë ¬ì„ ë‹¤ë£°ë•Œ ì‚¬ìš©í•  ì¸ë±ìŠ¤
+	int index2 = 0;  // b í–‰ë ¬ì„ ë‹¤ë£°ë•Œ ì‚¬ìš©í•  ì¸ë±ìŠ¤
+	int index3 = 0;  // c í–‰ë ¬ì„ ë‹¤ë£°ë•Œ ì‚¬ìš©í•  ì¸ë±ìŠ¤
 	for (int i = 0; i < a.rows; i++)
 	{
 		for (int j = 0; j < a.cols; j++)
@@ -62,8 +62,8 @@ SparseMatrix Matrix_add(SparseMatrix a, SparseMatrix b)  // (2) µÎ °³ÀÇ SparseMa
 			if (a.data[index1].row == i && a.data[index1].col == j && b.data[index2].row == i && b.data[index2].col == j)
 			{
 				c.data[index3].value = a.data[index1].value + b.data[index2].value;
-				c.data[index3].row = a.data[index1].row;  // ¾îÂ÷ÇÇ aÇà·Ä°ú bÇà·ÄÀÇ Çà ÀÎµ¦½º°¡ for¹®ÀÇ ÀÎµ¦½º¿Í °°À» °æ¿ì ÀÌ¹Ç·Î, a·Î ³Ö´øÁö b·Î ³Ö´øÁö µ¿ÀÏÇÏ´Ù.
-				c.data[index3].col = a.data[index1].col;  // ¾îÂ÷ÇÇ aÇà·Ä°ú bÇà·ÄÀÇ ¿­ ÀÎµ¦½º°¡ for¹®ÀÇ ÀÎµ¦½º¿Í °°À» °æ¿ì ÀÌ¹Ç·Î, a·Î ³Ö´øÁö b·Î ³Ö´øÁö µ¿ÀÏÇÏ´Ù.
+				c.data[index3].row = a.data[index1].row;  // ì–´ì°¨í”¼ aí–‰ë ¬ê³¼ bí–‰ë ¬ì˜ í–‰ ì¸ë±ìŠ¤ê°€ forë¬¸ì˜ ì¸ë±ìŠ¤ì™€ ê°™ì„ ê²½ìš° ì´ë¯€ë¡œ, aë¡œ ë„£ë˜ì§€ bë¡œ ë„£ë˜ì§€ ë™ì¼í•˜ë‹¤.
+				c.data[index3].col = a.data[index1].col;  // ì–´ì°¨í”¼ aí–‰ë ¬ê³¼ bí–‰ë ¬ì˜ ì—´ ì¸ë±ìŠ¤ê°€ forë¬¸ì˜ ì¸ë±ìŠ¤ì™€ ê°™ì„ ê²½ìš° ì´ë¯€ë¡œ, aë¡œ ë„£ë˜ì§€ bë¡œ ë„£ë˜ì§€ ë™ì¼í•˜ë‹¤.
 				index1++;
 				index2++;
 				index3++;
@@ -71,34 +71,34 @@ SparseMatrix Matrix_add(SparseMatrix a, SparseMatrix b)  // (2) µÎ °³ÀÇ SparseMa
 			else if (a.data[index1].row == i && a.data[index1].col == j)
 			{
 				c.data[index3].value = a.data[index1].value;
-				c.data[index3].row = a.data[index1].row;  // aÇà·ÄÀÇ Çà ÀÎµ¦½º¸¸ for¹®ÀÇ ÀÎµ¦½º¿Í °°À» °æ¿ì ÀÌ¹Ç·Î, a·Î ³Ö¾î¾ßÇÑ´Ù.
-				c.data[index3].col = a.data[index1].col;  // aÇà·ÄÀÇ ¿­ ÀÎµ¦½º¸¸ for¹®ÀÇ ÀÎµ¦½º¿Í °°À» °æ¿ì ÀÌ¹Ç·Î, a·Î ³Ö¾î¾ßÇÑ´Ù.
+				c.data[index3].row = a.data[index1].row;  // aí–‰ë ¬ì˜ í–‰ ì¸ë±ìŠ¤ë§Œ forë¬¸ì˜ ì¸ë±ìŠ¤ì™€ ê°™ì„ ê²½ìš° ì´ë¯€ë¡œ, aë¡œ ë„£ì–´ì•¼í•œë‹¤.
+				c.data[index3].col = a.data[index1].col;  // aí–‰ë ¬ì˜ ì—´ ì¸ë±ìŠ¤ë§Œ forë¬¸ì˜ ì¸ë±ìŠ¤ì™€ ê°™ì„ ê²½ìš° ì´ë¯€ë¡œ, aë¡œ ë„£ì–´ì•¼í•œë‹¤.
 				index1++;
 				index3++;
 			}
 			else if (b.data[index2].row == i && b.data[index2].col == j)
 			{
 				c.data[index3].value = b.data[index2].value;
-				c.data[index3].row = b.data[index2].row;  // bÇà·ÄÀÇ Çà ÀÎµ¦½º¸¸ for¹®ÀÇ ÀÎµ¦½º¿Í °°À» °æ¿ì ÀÌ¹Ç·Î, b·Î ³Ö¾î¾ßÇÑ´Ù.
-				c.data[index3].col = b.data[index2].col;  // bÇà·ÄÀÇ ¿­ ÀÎµ¦½º¸¸ for¹®ÀÇ ÀÎµ¦½º¿Í °°À» °æ¿ì ÀÌ¹Ç·Î, b·Î ³Ö¾î¾ßÇÑ´Ù.
+				c.data[index3].row = b.data[index2].row;  // bí–‰ë ¬ì˜ í–‰ ì¸ë±ìŠ¤ë§Œ forë¬¸ì˜ ì¸ë±ìŠ¤ì™€ ê°™ì„ ê²½ìš° ì´ë¯€ë¡œ, bë¡œ ë„£ì–´ì•¼í•œë‹¤.
+				c.data[index3].col = b.data[index2].col;  // bí–‰ë ¬ì˜ ì—´ ì¸ë±ìŠ¤ë§Œ forë¬¸ì˜ ì¸ë±ìŠ¤ì™€ ê°™ì„ ê²½ìš° ì´ë¯€ë¡œ, bë¡œ ë„£ì–´ì•¼í•œë‹¤.
 				index2++;
 				index3++;
 			}
 		}
 	}
-	c.terms = index3;  // 0ºÎÅÍ Á¶°Ç¿¡ ¸Â´Â °³¼ö¸¸Å­ index¸¦ ++ÇØÁÖ¾úÀ¸¹Ç·Î, Ç×ÀÇ '°³¼ö'·Î ³Ö¾îÁÖ´Â°ÍÀÌ ¸Â´Ù.
+	c.terms = index3;  // 0ë¶€í„° ì¡°ê±´ì— ë§ëŠ” ê°œìˆ˜ë§Œí¼ indexë¥¼ ++í•´ì£¼ì—ˆìœ¼ë¯€ë¡œ, í•­ì˜ 'ê°œìˆ˜'ë¡œ ë„£ì–´ì£¼ëŠ”ê²ƒì´ ë§ë‹¤.
 
 	return c;
 }
 
-void printfuc(SparseMatrix a)  // (3) SparseMatrix¿¡ ÀúÀåµÈ ³»¿ëÀ» 0À» Æ÷ÇÔÇÑ ÀÌÂ÷¿ø Çà·Ä ÇüÅÂ·Î Ãâ·ÂÇÏ´Â ÇÔ¼ö
+void printfuc(SparseMatrix a)  // (3) SparseMatrixì— ì €ì¥ëœ ë‚´ìš©ì„ 0ì„ í¬í•¨í•œ ì´ì°¨ì› í–‰ë ¬ í˜•íƒœë¡œ ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
 {
 	printf("=======================================\n");
 
 	int index = 0;
-	for (int i = 0; i < a.rows; i++)  // Çà °³¼ö¸¸Å­ ¹İº¹¹® µ¹¸².
+	for (int i = 0; i < a.rows; i++)  // í–‰ ê°œìˆ˜ë§Œí¼ ë°˜ë³µë¬¸ ëŒë¦¼.
 	{
-		for (int j = 0; j < a.cols; j++)  // ¿­ °³¼ö¸¸Å­ ¹İº¹¹® µ¹¸².
+		for (int j = 0; j < a.cols; j++)  // ì—´ ê°œìˆ˜ë§Œí¼ ë°˜ë³µë¬¸ ëŒë¦¼.
 		{
 			if (a.data[index].row == i && a.data[index].col == j)
 			{
@@ -145,7 +145,7 @@ int main(void)
 							 { 0, 0, 0, 0, 0, 0, 4, 0, 0, 0 } };
 
 
-	printf("À§ ¹è¿­ a[][], b[][], c[][]¸¦ (1)À» ÀÌ¿ëÇÏ¿© °¢°¢ SparseMatrix A, B, C·Î º¯È¯ ¿Ï·á. A,B,CÀÇ rows, cols, terms¸¦ Â÷·Ê·Î Ãâ·Â:\n");
+	printf("ìœ„ ë°°ì—´ a[][], b[][], c[][]ë¥¼ (1)ì„ ì´ìš©í•˜ì—¬ ê°ê° SparseMatrix A, B, Cë¡œ ë³€í™˜ ì™„ë£Œ. A,B,Cì˜ rows, cols, termsë¥¼ ì°¨ë¡€ë¡œ ì¶œë ¥:\n");
 	SparseMatrix A = transpose(a);
 	printf("%d %d %d\n", A.rows, A.cols, A.terms);
 	SparseMatrix B = transpose(b);
@@ -153,15 +153,15 @@ int main(void)
 	SparseMatrix C = transpose(c);
 	printf("%d %d %d\n\n", C.rows, C.cols, C.terms);
 
-	printf("A+B¸¦ (2)·Î °è»êÇÏ°í,¹İÈ¯µÈ °á°ú SparseMatrix¸¦ (3)À» ÀÌ¿ëÇÏ¿© Ãâ·ÂÇÏ±â:\n");
+	printf("A+Bë¥¼ (2)ë¡œ ê³„ì‚°í•˜ê³ ,ë°˜í™˜ëœ ê²°ê³¼ SparseMatrixë¥¼ (3)ì„ ì´ìš©í•˜ì—¬ ì¶œë ¥í•˜ê¸°:\n");
 	printfuc(Matrix_add(A, B));
 	printf("\n");
 
-	printf("A+C¸¦ (2)·Î °è»êÇÏ¿© ¹İÈ¯µÈ °á°ú SparseMatrix¸¦ (3)À» ÀÌ¿ëÇÏ¿© Ãâ·ÂÇÏ±â:\n");
+	printf("A+Cë¥¼ (2)ë¡œ ê³„ì‚°í•˜ì—¬ ë°˜í™˜ëœ ê²°ê³¼ SparseMatrixë¥¼ (3)ì„ ì´ìš©í•˜ì—¬ ì¶œë ¥í•˜ê¸°:\n");
 	printfuc(Matrix_add(A, C));
 	printf("\n");
 
-	printf("B+C¸¦ (2)·Î °è»êÇÏ¿© ¹İÈ¯µÈ °á°ú SparseMatrix¸¦ (3)À» ÀÌ¿ëÇÏ¿© Ãâ·ÂÇÏ±â:\n");
+	printf("B+Cë¥¼ (2)ë¡œ ê³„ì‚°í•˜ì—¬ ë°˜í™˜ëœ ê²°ê³¼ SparseMatrixë¥¼ (3)ì„ ì´ìš©í•˜ì—¬ ì¶œë ¥í•˜ê¸°:\n");
 	printfuc(Matrix_add(B, C));
 	printf("\n");
 
