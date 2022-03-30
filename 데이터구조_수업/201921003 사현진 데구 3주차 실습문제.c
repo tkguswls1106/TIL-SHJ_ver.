@@ -6,14 +6,14 @@
 #define _CRT_SECURE_NO_WARNINGS
 #define MAX_TERMS 101
 
-typedef struct { // ´ÙÇ×½Ä ±¸Á¶Ã¼ Å¸ÀÔ ¼±¾ğ
-	int degree; // ´ÙÇ×½ÄÀÇ Â÷¼ö
-	float coef[MAX_DEGREE]; // ´ÙÇ×½ÄÀÇ °è¼ö
+typedef struct { // ë‹¤í•­ì‹ êµ¬ì¡°ì²´ íƒ€ì… ì„ ì–¸
+	int degree; // ë‹¤í•­ì‹ì˜ ì°¨ìˆ˜
+	float coef[MAX_DEGREE]; // ë‹¤í•­ì‹ì˜ ê³„ìˆ˜
 } polynomial;
 
-typedef struct { // ´ÙÇ×½Ä ±¸Á¶Ã¼ Å¸ÀÔ ¼±¾ğ
-	int degree; // ´ÙÇ×½ÄÀÇ Â÷¼ö
-	float coef[MAX_DEGREE]; // ´ÙÇ×½ÄÀÇ °è¼ö
+typedef struct { // ë‹¤í•­ì‹ êµ¬ì¡°ì²´ íƒ€ì… ì„ ì–¸
+	int degree; // ë‹¤í•­ì‹ì˜ ì°¨ìˆ˜
+	float coef[MAX_DEGREE]; // ë‹¤í•­ì‹ì˜ ê³„ìˆ˜
 } polynomial2;
 
 typedef struct {
@@ -35,27 +35,27 @@ int avail = 0;
 
 polynomial poly_minus(polynomial A, polynomial B)
 {
-	polynomial C; // °á°ú ´ÙÇ×½Ä
-	int Apos = 0, Bpos = 0, Cpos = 0; // ¹è¿­ ÀÎµ¦½º º¯¼ö
+	polynomial C; // ê²°ê³¼ ë‹¤í•­ì‹
+	int Apos = 0, Bpos = 0, Cpos = 0; // ë°°ì—´ ì¸ë±ìŠ¤ ë³€ìˆ˜
 	int degree_a = A.degree;
 	int degree_b = B.degree;
-	C.degree = MAX(A.degree, B.degree); // °á°ú ´ÙÇ×½Ä Â÷¼ö
+	C.degree = MAX(A.degree, B.degree); // ê²°ê³¼ ë‹¤í•­ì‹ ì°¨ìˆ˜
 
 	while (Apos <= A.degree && Bpos <= B.degree)
 	{
-		if (degree_a > degree_b)  // AÇ× > BÇ×
+		if (degree_a > degree_b)  // Aí•­ > Bí•­
 		{
 			C.coef[Cpos++] = A.coef[Apos++];
 			degree_a--;
 		}
 
-		else if (degree_a == degree_b)  // AÇ× == BÇ×
+		else if (degree_a == degree_b)  // Aí•­ == Bí•­
 		{
 			C.coef[Cpos++] = A.coef[Apos++] - B.coef[Bpos++];
 			degree_a--; degree_b--;
 		}
 
-		else  // BÇ× > AÇ×
+		else  // Bí•­ > Aí•­
 		{
 			C.coef[Cpos++] = B.coef[Bpos++];
 			degree_b--;
@@ -74,12 +74,12 @@ void poly_minus2(int As, int Ae, int Bs, int Be, int *Cs, int *Ce)  // C = A + B
 	while (As <= Ae && Bs <= Be)
 		switch (compare(terms[As].expon, terms[Bs].expon))
 		{
-		case '>': // AÀÇ Â÷¼ö > BÀÇ Â÷¼ö
+		case '>': // Aì˜ ì°¨ìˆ˜ > Bì˜ ì°¨ìˆ˜
 			attach(terms[As].coef, terms[As].expon);
 			As++;
 			break;
 
-		case '=': // AÀÇ Â÷¼ö == BÀÇ Â÷¼ö
+		case '=': // Aì˜ ì°¨ìˆ˜ == Bì˜ ì°¨ìˆ˜
 			tempcoef = terms[As].coef - terms[Bs].coef;
 			if (tempcoef)
 				attach(tempcoef, terms[As].expon);
@@ -87,16 +87,16 @@ void poly_minus2(int As, int Ae, int Bs, int Be, int *Cs, int *Ce)  // C = A + B
 			Bs++;
 			break;
 
-		case '<': // AÀÇ Â÷¼ö < BÀÇ Â÷¼ö
+		case '<': // Aì˜ ì°¨ìˆ˜ < Bì˜ ì°¨ìˆ˜
 			attach(-1 * terms[Bs].coef, terms[Bs].expon);
 			Bs++;
 			break;
 		}
 
-	for (; As <= Ae; As++)  // AÀÇ ³ª¸ÓÁö Ç×µéÀ» ÀÌµ¿ÇÔ
+	for (; As <= Ae; As++)  // Aì˜ ë‚˜ë¨¸ì§€ í•­ë“¤ì„ ì´ë™í•¨
 		attach(terms[As].coef, terms[As].expon);
 
-	for (; Bs <= Be; Bs++)  // BÀÇ ³ª¸ÓÁö Ç×µéÀ» ÀÌµ¿ÇÔ
+	for (; Bs <= Be; Bs++)  // Bì˜ ë‚˜ë¨¸ì§€ í•­ë“¤ì„ ì´ë™í•¨
 		attach(-1 * terms[Bs].coef, terms[Bs].expon);
 	if (avail == a)
 		avail++;
@@ -134,31 +134,31 @@ void problem1_1()
 {
 	polynomial a, b, c;
 
-	printf("<Ã¹¹øÂ° ´ÙÇ×½Ä>\n");
-	printf("Ã¹¹øÂ° ´ÙÇ×½ÄÀÇ ÃÖ°í Â÷¼ö: ");
+	printf("<ì²«ë²ˆì§¸ ë‹¤í•­ì‹>\n");
+	printf("ì²«ë²ˆì§¸ ë‹¤í•­ì‹ì˜ ìµœê³  ì°¨ìˆ˜: ");
 	scanf_s("%d", &a.degree);
-	printf("°¢ Ç×ÀÇ °è¼ö¸¦ Â÷·Ê·Î ÀÔ·Â : ");
+	printf("ê° í•­ì˜ ê³„ìˆ˜ë¥¼ ì°¨ë¡€ë¡œ ì…ë ¥ : ");
 	for (int i = 0; i <= a.degree; i++)
 		scanf_s("%f", &a.coef[i]);
-	printf("Ã¹¹øÂ° ´ÙÇ×½Ä Ãâ·Â: ");
+	printf("ì²«ë²ˆì§¸ ë‹¤í•­ì‹ ì¶œë ¥: ");
 	print_poly(a);
 	printf("\n\n");
 
-	printf("<µÎ¹øÂ° ´ÙÇ×½Ä>\n");
-	printf("µÎ¹øÂ° ´ÙÇ×½ÄÀÇ ÃÖ°í Â÷¼ö : ");
+	printf("<ë‘ë²ˆì§¸ ë‹¤í•­ì‹>\n");
+	printf("ë‘ë²ˆì§¸ ë‹¤í•­ì‹ì˜ ìµœê³  ì°¨ìˆ˜ : ");
 	scanf_s("%d", &b.degree);
-	printf("°¢ Ç×ÀÇ °è¼ö¸¦ Â÷·Ê·Î ÀÔ·Â: ");
+	printf("ê° í•­ì˜ ê³„ìˆ˜ë¥¼ ì°¨ë¡€ë¡œ ì…ë ¥: ");
 	for (int i = 0; i <= b.degree; i++)
 		scanf_s("%f", &b.coef[i]);
-	printf("µÎ¹øÂ° ´ÙÇ×½Ä Ãâ·Â: ");
+	printf("ë‘ë²ˆì§¸ ë‹¤í•­ì‹ ì¶œë ¥: ");
 	print_poly(b);
 
-	printf("\n<µÎ ´ÙÇ×½ÄÀÇ »¬¼À>\n");
+	printf("\n<ë‘ ë‹¤í•­ì‹ì˜ ëº„ì…ˆ>\n");
 	print_poly(a);
 	print_poly(b);
 	c = poly_minus(a, b);
 	printf("----------------------------------------------------------\n");
-	printf("»¬¼À °á°ú: ");
+	printf("ëº„ì…ˆ ê²°ê³¼: ");
 	print_poly(c);
 
 	printf("\n");
@@ -189,16 +189,16 @@ void problem1_2()
 {
 	polynomial2 a;
 
-	printf("<´ÙÇ×½Ä ÀÔ·Â>\n");
-	printf("´ÙÇ×½ÄÀÇ ÃÖ°í Â÷¼ö: ");
+	printf("<ë‹¤í•­ì‹ ì…ë ¥>\n");
+	printf("ë‹¤í•­ì‹ì˜ ìµœê³  ì°¨ìˆ˜: ");
 	scanf_s("%d", &a.degree);
-	printf("°¢ Ç×ÀÇ °è¼ö¸¦ Â÷·Ê·Î ÀÔ·Â : ");
+	printf("ê° í•­ì˜ ê³„ìˆ˜ë¥¼ ì°¨ë¡€ë¡œ ì…ë ¥ : ");
 	for (int i = 0; i <= a.degree; i++)
 		scanf_s("%f", &a.coef[i]);
-	printf("´ÙÇ×½Ä Ãâ·Â: A(x) = ");
+	printf("ë‹¤í•­ì‹ ì¶œë ¥: A(x) = ");
 	print_poly2(a);
 
-	printf("\n\nA(x) ÇÔ¼ö¿¡ ´ëÀÔÇÒ x°ªÀ» ÀÔ·ÂÇÏ½Ã¿À: ");
+	printf("\n\nA(x) í•¨ìˆ˜ì— ëŒ€ì…í•  xê°’ì„ ì…ë ¥í•˜ì‹œì˜¤: ");
 	int x;
 	scanf("%d", &x);
 
@@ -216,11 +216,11 @@ char compare(int a, int b)
 	else return '<';
 }
 
-void attach(int coef, int expon)  // »õ·Î¿î Ç×À» ´ÙÇ×½Ä¿¡ Ãß°¡ÇÑ´Ù.
+void attach(int coef, int expon)  // ìƒˆë¡œìš´ í•­ì„ ë‹¤í•­ì‹ì— ì¶”ê°€í•œë‹¤.
 {
 	if (avail > MAX_TERMS)
 	{
-		fprintf(stderr, "Ç×ÀÇ °³¼ö°¡ ³Ê¹« ¸¹À½\n");
+		fprintf(stderr, "í•­ì˜ ê°œìˆ˜ê°€ ë„ˆë¬´ ë§ìŒ\n");
 		exit(1);
 	}
 
@@ -232,49 +232,49 @@ void attach(int coef, int expon)  // »õ·Î¿î Ç×À» ´ÙÇ×½Ä¿¡ Ãß°¡ÇÑ´Ù.
 
 void problem2_1()
 {
-	int As = 0, Ae, Bs, Be, Cs, Ce = 0;  // ÀÎµ¦½º¸íÀ¸·Î ÁöÁ¤
+	int As = 0, Ae, Bs, Be, Cs, Ce = 0;  // ì¸ë±ìŠ¤ëª…ìœ¼ë¡œ ì§€ì •
 
-	printf("<Ã¹¹øÂ° ´ÙÇ×½Ä>\n");
-	printf("Ã¹¹øÂ° ´ÙÇ×½ÄÀÇ Ç×À» ¸î °³ ÀÔ·Â¹ŞÀ»°ÍÀÎ°¡?: ");
-	scanf("%d", &Ae);  // ¿¹¸¦µé¾î 3 ÀÔ·Â
-	Ae = Ae - 1;  // Aend ÀÎµ¦½º´Â 2
+	printf("<ì²«ë²ˆì§¸ ë‹¤í•­ì‹>\n");
+	printf("ì²«ë²ˆì§¸ ë‹¤í•­ì‹ì˜ í•­ì„ ëª‡ ê°œ ì…ë ¥ë°›ì„ê²ƒì¸ê°€?: ");
+	scanf("%d", &Ae);  // ì˜ˆë¥¼ë“¤ì–´ 3 ì…ë ¥
+	Ae = Ae - 1;  // Aend ì¸ë±ìŠ¤ëŠ” 2
 
-	printf("Ã¹¹øÂ° ´ÙÇ×½ÄÀÇ °¢ Ç×ÀÇ °è¼ö¿Í Â÷¼ö¸¦ Â÷·Ê·Î ¹ø°¥¾Æ°¡¸ç ÀÔ·ÂÇÏ½Ã¿À:\n");
-	for (int i = 0; i <= Ae; i++)  // 0~2 ÀÎµ¦½º Æ÷¹®
+	printf("ì²«ë²ˆì§¸ ë‹¤í•­ì‹ì˜ ê° í•­ì˜ ê³„ìˆ˜ì™€ ì°¨ìˆ˜ë¥¼ ì°¨ë¡€ë¡œ ë²ˆê°ˆì•„ê°€ë©° ì…ë ¥í•˜ì‹œì˜¤:\n");
+	for (int i = 0; i <= Ae; i++)  // 0~2 ì¸ë±ìŠ¤ í¬ë¬¸
 	{
-		printf("°¢ Ç×ÀÇ {°è¼ö, Â÷¼ö}: ");
+		printf("ê° í•­ì˜ {ê³„ìˆ˜, ì°¨ìˆ˜}: ");
 		scanf("%d %d", &terms[i].coef, &terms[i].expon);
 	}
 
-	printf("Ã¹¹øÂ° ´ÙÇ×½Ä Ãâ·Â: ");
-	print_poly3(As, Ae);  // ÀÎµ¦½º¸¦ ¸Å°³º¯¼ö·Î ³ÖÀ½
+	printf("ì²«ë²ˆì§¸ ë‹¤í•­ì‹ ì¶œë ¥: ");
+	print_poly3(As, Ae);  // ì¸ë±ìŠ¤ë¥¼ ë§¤ê°œë³€ìˆ˜ë¡œ ë„£ìŒ
 
 	printf("\n");
 
-	printf("<µÎ¹øÂ° ´ÙÇ×½Ä>\n");
-	printf("µÎ¹øÂ° ´ÙÇ×½ÄÀÇ Ç×À» ¸î °³ ÀÔ·Â¹ŞÀ»°ÍÀÎ°¡?: ");
-	scanf("%d", &Be);  // ¿¹¸¦µé¾î 4 ÀÔ·Â
-	Be = Ae + Be;  // Be = 2+4 = 6, Bend ÀÎµ¦½º´Â 6
+	printf("<ë‘ë²ˆì§¸ ë‹¤í•­ì‹>\n");
+	printf("ë‘ë²ˆì§¸ ë‹¤í•­ì‹ì˜ í•­ì„ ëª‡ ê°œ ì…ë ¥ë°›ì„ê²ƒì¸ê°€?: ");
+	scanf("%d", &Be);  // ì˜ˆë¥¼ë“¤ì–´ 4 ì…ë ¥
+	Be = Ae + Be;  // Be = 2+4 = 6, Bend ì¸ë±ìŠ¤ëŠ” 6
 
-	Bs = Ae + 1;  // Bstart ÀÎµ¦½º´Â AeÀÎµ¦½º+1 = 2+1 = 3
+	Bs = Ae + 1;  // Bstart ì¸ë±ìŠ¤ëŠ” Aeì¸ë±ìŠ¤+1 = 2+1 = 3
 
-	avail = Be + 1;  // avail ÀÎµ¦½º´Â 6+1=7
+	avail = Be + 1;  // avail ì¸ë±ìŠ¤ëŠ” 6+1=7
 
-	printf("µÎ¹øÂ° ´ÙÇ×½ÄÀÇ °¢ Ç×ÀÇ °è¼ö¿Í Â÷¼ö¸¦ Â÷·Ê·Î ¹ø°¥¾Æ°¡¸ç ÀÔ·ÂÇÏ½Ã¿À:\n");
+	printf("ë‘ë²ˆì§¸ ë‹¤í•­ì‹ì˜ ê° í•­ì˜ ê³„ìˆ˜ì™€ ì°¨ìˆ˜ë¥¼ ì°¨ë¡€ë¡œ ë²ˆê°ˆì•„ê°€ë©° ì…ë ¥í•˜ì‹œì˜¤:\n");
 	for (int i = Bs; i <= Be; i++)
 	{
-		printf("°¢ Ç×ÀÇ {°è¼ö, Â÷¼ö}: ");
+		printf("ê° í•­ì˜ {ê³„ìˆ˜, ì°¨ìˆ˜}: ");
 		scanf("%d %d", &terms[i].coef, &terms[i].expon);
 	}
 
-	printf("µÎ¹øÂ° ´ÙÇ×½Ä Ãâ·Â: ");
+	printf("ë‘ë²ˆì§¸ ë‹¤í•­ì‹ ì¶œë ¥: ");
 	print_poly3(Bs, Be);
 
-	printf("\n<µÎ ´ÙÇ×½ÄÀÇ »¬¼À>\n");
+	printf("\n<ë‘ ë‹¤í•­ì‹ì˜ ëº„ì…ˆ>\n");
 	print_poly3(As, Ae);
 	print_poly3(Bs, Be);
 	printf("----------------------------------------------------------\n");
-	printf("»¬¼À °á°ú: ");
+	printf("ëº„ì…ˆ ê²°ê³¼: ");
 	Cs = Be + 1;
 	poly_minus2(As, Ae, Bs, Be, &Cs, &Ce);
 
@@ -287,30 +287,30 @@ void problem2_1()
 
 void problem2_2()
 {
-	int As = 0, Ae;  // ÀÎµ¦½º¸íÀ¸·Î ÁöÁ¤
+	int As = 0, Ae;  // ì¸ë±ìŠ¤ëª…ìœ¼ë¡œ ì§€ì •
 
 	polynomial4 terms[MAX_TERMS];
 
-	printf("´ÙÇ×½ÄÀÇ Ç×À» ¸î °³ ÀÔ·Â¹ŞÀ»°ÍÀÎ°¡?: ");
-	scanf("%d", &Ae);  // ¿¹¸¦µé¾î 3 ÀÔ·Â
-	Ae = Ae - 1;  // Aend ÀÎµ¦½º´Â 2
+	printf("ë‹¤í•­ì‹ì˜ í•­ì„ ëª‡ ê°œ ì…ë ¥ë°›ì„ê²ƒì¸ê°€?: ");
+	scanf("%d", &Ae);  // ì˜ˆë¥¼ë“¤ì–´ 3 ì…ë ¥
+	Ae = Ae - 1;  // Aend ì¸ë±ìŠ¤ëŠ” 2
 
 
-	printf("´ÙÇ×½ÄÀÇ °¢ Ç×ÀÇ °è¼ö¿Í Â÷¼ö¸¦ Â÷·Ê·Î ¹ø°¥¾Æ°¡¸ç ÀÔ·ÂÇÏ½Ã¿À:\n");
-	for (int i = 0; i <= Ae; i++)  // 0~2 ÀÎµ¦½º Æ÷¹®
+	printf("ë‹¤í•­ì‹ì˜ ê° í•­ì˜ ê³„ìˆ˜ì™€ ì°¨ìˆ˜ë¥¼ ì°¨ë¡€ë¡œ ë²ˆê°ˆì•„ê°€ë©° ì…ë ¥í•˜ì‹œì˜¤:\n");
+	for (int i = 0; i <= Ae; i++)  // 0~2 ì¸ë±ìŠ¤ í¬ë¬¸
 	{
-		printf("°¢ Ç×ÀÇ {°è¼ö, Â÷¼ö}: ");
+		printf("ê° í•­ì˜ {ê³„ìˆ˜, ì°¨ìˆ˜}: ");
 		scanf("%d %d", &terms[i].coef, &terms[i].expon);
 	}
 
-	printf("´ÙÇ×½Ä Ãâ·Â: ");
+	printf("ë‹¤í•­ì‹ ì¶œë ¥: ");
 	for (int i = As; i < Ae; i++)
 		printf("%dx^%d + ", terms[i].coef, terms[i].expon);
 	printf("%dx^%d\n", terms[Ae].coef, terms[Ae].expon);
 
 	printf("\n");
 
-	printf("\nA(x) ÇÔ¼ö¿¡ ´ëÀÔÇÒ x°ªÀ» ÀÔ·ÂÇÏ½Ã¿À: ");
+	printf("\nA(x) í•¨ìˆ˜ì— ëŒ€ì…í•  xê°’ì„ ì…ë ¥í•˜ì‹œì˜¤: ");
 	int x;
 	scanf("%d", &x);
 
@@ -330,12 +330,12 @@ void problem2_2()
 int menu()
 {
 	int n;
-	printf("1. 1-1¹ø ¹®Á¦\n");
-	printf("2. 1-2¹ø ¹®Á¦\n");
-	printf("3. 2-1¹ø ¹®Á¦\n");
-	printf("4. 2-2¹ø ¹®Á¦\n");
+	printf("1. 1-1ë²ˆ ë¬¸ì œ\n");
+	printf("2. 1-2ë²ˆ ë¬¸ì œ\n");
+	printf("3. 2-1ë²ˆ ë¬¸ì œ\n");
+	printf("4. 2-2ë²ˆ ë¬¸ì œ\n");
 	printf("5. exit\n\n");
-	printf("¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä.\n\n");
+	printf("ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš”.\n\n");
 	scanf("%d", &n);
 	printf("\n");
 	return n;
