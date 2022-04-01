@@ -54,7 +54,6 @@ public class Hello2 {
 
 break문은 안쪽 반복문을 종료하고 빠져나오게 된다.
 보통 while(true) 같은 무한반복문에 자주 쓰인다.
-switch문에도 쓰인다.
 참고로 break out 으로 안쪽반복문뿐만 아니라 바깥쪽반복문까지 탈출시킬수 있다.
 
 continue문은 예를들어 while문에서 break와 다르게 탈출시키지않고,
