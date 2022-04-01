@@ -1,7 +1,7 @@
 자바에서 System.out.println 말고도 System.out.printf 도 사용 가능하다.
 예) System.out.printf("%d %d\n", i, j);
 
-print문은 system.out인데, 반대로 입력하는 scan문은 system.out이 아닌, system.in 이다.
+print문은 System.out인데, 반대로 입력하는 scan문은 System.out이 아닌, system.in 이다.
 import java.util.Scanner;
 Scanner in = new Scanner(System.in);
 int num_name = in.nextInt();
@@ -48,3 +48,14 @@ public class Hello2 {
 	}
 }
 ---------------------------------------------------------------------------------
+
+메서드는 c언어에서 함수와 동일하다고 보면 될 것 같다.
+그리고 c언어처럼 메서드(함수)에서 리턴값없이 변수를 다시 메인 메서드(함수)로 가져오면 지역변수로써 숫자가 날아간다.
+
+break문은 안쪽 반복문을 종료하고 빠져나오게 된다.
+보통 while(true) 같은 무한반복문에 자주 쓰인다.
+switch문에도 쓰인다.
+참고로 break out 으로 안쪽반복문뿐만 아니라 바깥쪽반복문까지 탈출시킬수 있다.
+
+continue문은 예를들어 while문에서 break와 다르게 탈출시키지않고,
+continue 밑의 문장을 실행시키지 않고 다시 반복문으로 돌아가 반복을 마저 이어서 실행시킬수 있게 한다.
