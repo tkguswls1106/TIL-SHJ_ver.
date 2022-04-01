@@ -11,6 +11,23 @@ public static [반환 자료형타입] [메서드(함수) 이름] (매개변수)
 예를들어 public static void func (int num) {}
 
 -----------------------------------------------------------------------
+<메인함수에서 외부 메서드를 불러와서 매개변수를 넣어 숫자의 합을 구하는 코드>
+
+public static void main(String[] args) {
+      sum(1,10);
+      sum(1,100);
+      sum(1,1000);
+
+   }
+      public static void sum(int A,int B) {
+         int sum=0;
+         for(int i = A;i<B+1;i++) 
+            sum=sum+i;
+         System.out.println(sum);
+      }
+}
+
+-----------------------------------------------------------------------
 <지역변수 관련 자바 코드>
 public class Hello2 { 
 	public static void main(String[] args) {
