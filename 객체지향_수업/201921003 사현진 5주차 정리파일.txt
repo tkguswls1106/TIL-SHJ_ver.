@@ -1,0 +1,87 @@
+break문은 안쪽 반복문을 종료하고 빠져나오게 된다.
+보통 while(true) 같은 무한반복문에 자주 쓰인다.
+switch문에도 쓰인다.
+참고로 break out 으로 안쪽반복문뿐만 아니라 바깥쪽반복문까지 탈출시킬수 있다.
+
+continue문은 예를들어 while문에서 break와 다르게 탈출시키지않고,
+continue 밑의 문장을 실행시키지 않고 다시 반복문으로 돌아가 반복을 마저 이어서 실행시킬수 있게 한다.
+
+메서드는 c언어에서 함수와 동일하다고 보면 된다.
+public static [반환 자료형타입] [메서드(함수) 이름] (매개변수) {}
+예를들어 public static void func (int num) {}
+
+-----------------------------------------------------------------------
+<지역변수 관련 자바 코드>
+public class Hello2 { 
+	public static void main(String[] args) {
+		int x = 0;
+		System.out.println("전 x: " + x);
+		func(x);
+		System.out.println("후 x: " + x);
+
+	}
+	public static void func(int n) {
+		System.out.println("메서드 시작 n: " + n);
+		n++;
+		System.out.println("메서드 끝 n: " + n);
+	}
+}
+
+출력 => 
+전 x: 0
+메서드 시작 n: 0
+메서드 끝 n: 1
+후 x: 0
+이 코드와 출력값을 보다시피 c언어처럼 메서드(함수)에서 리턴값없이
+변수를 다시 메인 메서드(함수)로 가져오면 지역변수로써 숫자가 날아간다.
+-----------------------------------------------------------------------
+
+switch문으로 switch()안에 받은 숫자로 case의 숫자에 맞는 조건 코드를 실행시킬 수 있다.
+
+-----------------------------------------------------------------------
+<입력받은 숫자만큼 별(*)을 출력하는 문제의 코드>
+
+import java.util.Scanner;
+
+public class Hello2 {
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		int num = in.nextInt();
+		star(num);
+	}
+
+	public static void star(int n) {
+		for (int i = 0; i < n; i++) {
+			System.out.print("*");
+		}
+	}
+}
+
+-----------------------------------------------------------------------
+<원하는 국가의 번호를 입력하고, 해당 국가에 맞는 언어 말을 출력해주는 문제의 코드>
+
+import java.util.Scanner;
+
+public class Hello2 {
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		System.out.print("1. 국어, 2. 영어, 3. 일본어 중에서 숫자를 선택하시오: ");
+		int num = in.nextInt();
+		language(num);
+	}
+
+	public static void language(int n) {
+		switch (n) {
+		case 1:
+			System.out.println("안녕하세요!");
+			break;
+		case 2:
+			System.out.println("하이!");
+			break;
+		case 3:
+			System.out.println("아리가또고자이마스!");
+			break;
+		}
+	}
+}
+-----------------------------------------------------------------------
