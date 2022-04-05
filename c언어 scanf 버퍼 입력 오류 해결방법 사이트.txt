@@ -1,0 +1,4 @@
+https://swpfun.tistory.com/m/586
+
+c언어 scanf 입력 오류
+버퍼 문제 해결 방법 사이트
