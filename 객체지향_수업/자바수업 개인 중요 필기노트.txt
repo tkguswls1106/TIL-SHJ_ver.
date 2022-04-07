@@ -1,20 +1,44 @@
 자바에서 System.out.println 말고도 System.out.printf 도 사용 가능하다.
 예) System.out.printf("%d %d\n", i, j);
 
-print문은 System.out인데, 반대로 입력하는 scan문은 System.out이 아닌, system.in 이다.
+print문은 System.out인데, 반대로 입력하는 scan문은 System.out이 아닌, System.in 이다.
 import java.util.Scanner;
 Scanner in = new Scanner(System.in);
 int num_name = in.nextInt();
 
+Scanner[클래스 이름] in[객체 이름] = new Scanner[클래스 이름](System.in);
+int num_name = in.nextInt();
+객체 이름은 내가 편한대로 지정하면 된다.
+(대체로 Scanner 의 경우 객체이름은 in, input, sc, scan 이렇게 4가지가 가장 많이 쓰인다.)
+
+예를들어
+Scanner shj = new Scanner(System.in);
+int num_name = shj.nextInt();
+같은말은
+Scanner shj = new Scanner(System.in);
+int num;
+num = shj.nextInt();
+
+<스캐너 관련 메소드명 인터넷에서 가져온것>
+nextBoolean()	boolean의 자료형을 입력받습니다. 자료형은 두개인 true,false로 대소문자를 구분하지 않습니다.  
+nextByte()	byte의 자료형을 입력으로 받습니다. 입력 범위(127~ -128) 밖이면 InputMismatchException이 발생합니다.
+nextShort()	short의 자료형을 입력받습니다.
+nextInt()	int형의 자료형을 입력받습니다. 
+nextLong()	long형의 자료형을 입력받습니다.
+nextDouble()	double형의 자료형을 입력받습니다.
+nextFloat()	float형의 자료형을 입력받습니다.
+next()	String형의 문자열을 입력받습니다. 이때 공백 문자까지 입력받습니다.  
+nextLine()	문자열을 입력받는데 다른 next~() 메소드와 다른 점은 줄단위로 입력받는다는 점입니다. 
+
 ---------------------------------------------------------------------------------
 scan의 예)
-import java.util.Scanner;
+import java.util.Scanner;  // 이렇게 클래스 선언전에 첫번째로 스캐너 임포트 해주고
 public class Hello2 {
 	public static void main(String[] args) {
-		Scanner in = new Scanner(System.in);
+		Scanner in = new Scanner(System.in);  // 보통 이렇게 위에다가 먼저 스캐너 선언해주고 (여기서는 in 이란 객체 이름으로 스캐너 만듬.)
 		System.out.print("점수를 입력하세요: ");
-		int jumsu = in.nextInt();
-		String grade;
+		int jumsu = in.nextInt();  // 요렇게 사용 (위에서 만든 스캐너의 객체이름인 in을 그대로 사용함.)
+		String grade;  // 문자열 선언할때만 string이 아닌 String 이다. 다른 자료형들은 소문자 int 등등 그대로 해주면된다.
 
 		if (jumsu >= 90)
 			grade = "A";
