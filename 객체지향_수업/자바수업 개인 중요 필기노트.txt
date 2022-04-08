@@ -19,6 +19,10 @@ Scanner shj = new Scanner(System.in);
 int num;
 num = shj.nextInt();
 
+random 숫자도 scanner와 비슷하다.
+Random rand = new Random();  //  Random rand = new Random(최댓값)+최솟값; 이렇게 적어주면 범위 설정 가능함.
+int ran_num = rand.nextInt();
+
 <스캐너 관련 메소드명 인터넷에서 가져온것>
 nextBoolean()	boolean의 자료형을 입력받습니다. 자료형은 두개인 true,false로 대소문자를 구분하지 않습니다.  
 nextByte()	byte의 자료형을 입력으로 받습니다. 입력 범위(127~ -128) 밖이면 InputMismatchException이 발생합니다.
@@ -32,6 +36,7 @@ nextLine()	문자열을 입력받는데 다른 next~() 메소드와 다른 점�
 
 ---------------------------------------------------------------------------------
 scan의 예)
+
 import java.util.Scanner;  // 이렇게 클래스 선언전에 첫번째로 스캐너 임포트 해주고
 public class Hello2 {
 	public static void main(String[] args) {
@@ -57,6 +62,7 @@ public class Hello2 {
 
 ---------------------------------------------------------------------------------
 scan의 예2)
+
 import java.util.Scanner;
 
 public class Hello2 {
@@ -72,7 +78,39 @@ public class Hello2 {
 	}
 }
 ---------------------------------------------------------------------------------
+random의 예)
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class Hello2 {
+	public static void main(String args[]) {
+		Random rand = new Random();
+		int ran_num = rand.nextInt(20) + 1;  // 1~20 까지의 랜덤숫자 지정함.
+
+		Scanner in = new Scanner(System.in);
+		System.out.println("숫자를 입력해서 맞춰보세요: ");
+		int scan_num = in.nextInt();
+
+		if (ran_num == scan_num)
+			System.out.println("숫자를 맞히셨습니다!");
+		else {
+			while (ran_num != scan_num) {
+				if (ran_num < scan_num) {
+					System.out.println("틀렸습니다. 정답숫자는 이보다 더 작습니다!");
+					scan_num = in.nextInt();
+				} else {
+					System.out.println("틀렸습니다. 정답숫자는 이보다 더 큽니다!");
+					scan_num = in.nextInt();
+				}
+			}
+			System.out.println("숫자를 맞히셨습니다!");
+		}
+	}
+}
+---------------------------------------------------------------------------------
 <지역변수 관련 자바 코드>
+
 public class Hello2 { 
 	public static void main(String[] args) {
 		int x = 0;
