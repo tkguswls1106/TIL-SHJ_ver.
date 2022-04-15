@@ -225,9 +225,44 @@ public class Student {
 		System.out.printf("%s 학번이고 %s 생년월일인 학생은 공부를 열심히 합니다!", hakbun, birth);
 	}
 }
-========================================
-========================================
 
+========================================
+========================================
+// 포함관계 has-a 관계 => ~은 ~을 가지고있다
+public class Test {
+	public static void main(String[] args) {
+		Point p = new Point();
+		p.x = 10;
+		p.y = 20;
+		Point q = new Point();
+		q.x = 30;
+		q.y = 40;
+		System.out.println(p.x);
+		System.out.println(p.y);
+		System.out.println(q.x);
+		System.out.println(q.y);
+
+		Point3D r = new Point3D();
+		r.z = 50;
+		System.out.println(r.z);
+	}
+}
+
+class Point {
+	int x;
+	int y;
+}
+
+// 상속관계 is-a 관계 => ~은 ~이다.
+class Point3D extends Point {
+	int z;
+}
+
+// 정리: 
+// Test has a Point => 포함관계
+// Point3D is a Point => 상속관계  // 예를들어 강아지는 동물이다 와 같은 말이다.
+
+---------------------------------------------
 <지역변수 관련 자바 코드>
 
 public class Hello2 { 
@@ -408,4 +443,3 @@ D학생은 메모장에 '논문'을 쓰고 교수님이 말해준 당일 바로 
 public만 사용 가능하다는점이 중요하다.
 -> 공개(public) 인터페이스
 ------------------------------------------------------------------------
-
