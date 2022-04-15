@@ -263,6 +263,67 @@ class Point3D extends Point {
 // Point3D is a Point => 상속관계  // 예를들어 강아지는 동물이다 와 같은 말이다.
 
 ---------------------------------------------
+public class Test2 {
+	public static void main(String[] args) {
+		Circle c = new Circle(); // 이거가(1)
+		c.r = 3; // 반지름 크기: 3
+		c.center = new Point2(); // 이거 해줘야함. 안해주면 에러남. 이거가(2)
+		System.out.println(c.center.x + ", " + c.center.y);
+		c.center.x = 1;
+		c.center.y = 2; // 원의 중앙 좌표: (1, 2)
+		System.out.println(c.center.x + ", " + c.center.y);
+		c.draw();
+	}
+}
+
+class Shape {
+	String color = "blue";
+
+	void draw() {
+		System.out.println("draw the shape !");
+	}
+}
+
+class Point2 {
+	int x;
+	int y;
+
+	Point2() { // 이와 같은 class 이름과 동일하고, return 값이 없는 메서드를 생성자(특수한 메서드임.)라고 한다.
+				// 이거다(2)
+				// 만약에 Point2(int x, int y) {} 이런식이라면, {} 안에는 this.x=x; this.y=y; 라고 적어주면된다.
+				// 그렇다면 그냥 간단하게 this(0, 0); 으로 간단하게 만들어주면 된다. 다른 생성자를 호출하는 것이라고 한다.
+		x = 0;
+		y = 0; // 그냥 기본값으로 넣어줘보았다.
+	}
+}
+
+class Circle extends Shape { // Shape s = new Circle(); s.draw(); 이거 사용 가능한 코드이다.
+	Point2 center;
+	int r;
+
+	Circle() { // 이거다(1)
+		center = new Point2(); // 하지만 center = new Point2(1, 2); 처럼 아예 값도 넣어줘도 된다.
+								// 단, Point2(int x, int y) {} 일때만 가능이다.
+	}
+
+	void draw() {
+		System.out.println("draw the circle !"); // 오버라이딩(재정의) => Shape에도 draw()가 있고, 그 자식 클래스인 Circle에도 draw()가 있기때문이다.
+	}
+}
+
+class Triangle extends Shape {
+	int p1, p2, p3;
+}
+
+/*
+<출력결과
+0, 0
+1, 2
+draw the circle !
+
+ */
+
+---------------------------------------------
 <지역변수 관련 자바 코드>
 
 public class Hello2 { 
@@ -443,3 +504,7 @@ D학생은 메모장에 '논문'을 쓰고 교수님이 말해준 당일 바로 
 public만 사용 가능하다는점이 중요하다.
 -> 공개(public) 인터페이스
 ------------------------------------------------------------------------
+조상이 없는 클래스는 자동적으로 Object 클래스를 상속받게 된다.
+
+오버로딩은 상속x인 것이며, 기존에 없는 새로운 메서드를 정의하는 것이고,
+오버라이딩은 상속o이며, 상속받은 메서드의 내용을 변경하는 것이다.
