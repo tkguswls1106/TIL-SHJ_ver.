@@ -297,7 +297,7 @@ class Point2 {
 	}
 }
 
-class Circle extends Shape { // Shape s = new Circle(); s.draw(); 이거 사용 가능한 코드이다.
+class Circle extends Shape { // Shape s = new Circle(); s.draw(); 이거 사용 가능한 코드이다. 업캐스팅이다.
 	Point2 center;
 	int r;
 
@@ -311,10 +311,6 @@ class Circle extends Shape { // Shape s = new Circle(); s.draw(); 이거 사용 
 	}
 }
 
-class Triangle extends Shape {
-	int p1, p2, p3;
-}
-
 /*
 <출력결과
 0, 0
@@ -326,6 +322,9 @@ draw the circle !
 생성자는 new 연산자와 같이 사용되어 클래스로부터 객체를 생성할 때 호출되어 객체의 초기화를 담당한다.
 객체 초기화 : 필드를 초기화하거나, 메소드를 호출해서 객체를 사용할 준비를 하는 것
 생성자를 실행시키지 않고는 클래스로 부터 객체를 만들 수 없다.
+참고로 업캐스팅 관련 설명 사이트 1: https://madplay.github.io/post/java-upcasting-and-downcasting
+참고로 업캐스팅 관련 설명 사이트 1: https://great-yo.tistory.com/24
+
 ---------------------------------------------
 <지역변수 관련 자바 코드>
 
