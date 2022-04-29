@@ -1,0 +1,8 @@
+Encapsulation(캡슐화)하여 접근제한자(access modifier)로 정보들의 접근 범위를 제한한다.
+접근제한자: private, public ...
+
+is a 상속관계때문에 이루어질수있는 코드는
+Shape s = new Circle();
+
+오버라이딩: 상속관계의 메서드를 다시 내용만 변경하여 선언
+오버로딩: 자신만의 것으로 메서드 다시 선언
