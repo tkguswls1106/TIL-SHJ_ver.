@@ -10,3 +10,20 @@ print("\\")
 
 max( )  // 괄호 안에 인자로 넣은 매개변수들끼리 비교해서 가장 큰 값 반환함.
 min( )  // 괄호 안에 인자로 넣은 매개변수들끼리 비교해서 가장 작은 값 반환함.
+
+for i in range (5)  // i는 0~4 까지 반복된다.
+for i in range(0, 10, 2)  // 이건 0부터 10전까지(9까지) 2씩 증가한 숫자중에서 반복한다. 즉 0부터 짝수만.
+for i in range(10, 0, -1)  // 10에서 0후까지(1까지) 역순으로 -1씩 해가며 반복한다.
+
+for반복문 안에 n = list(map(int, input().split())) 이런것처럼 리스트를 map으로 생성하지 못한다.
+
+while 무한반복문에서, 수가 입력되지 않아서 에러가 발생하면 반복문을 끝낼 수 있도록 하려면
+try - except 구문을 활용하면 된다.
+예를들어
+while True:
+    try:
+        a, b = map(int, input().split())
+    except:
+        break
+    print(a+b) 
+
