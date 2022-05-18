@@ -21,8 +21,11 @@ for i in range (5)  // i는 0~4 까지 반복된다.
 for i in range(0, 10, 2)  // 이건 0부터 10전까지(9까지) 2씩 증가한 숫자중에서 반복한다. 즉 0부터 짝수만.
 for i in range(10, 0, -1)  // 10에서 0후까지(1까지) 역순으로 -1씩 해가며 반복한다.
 
+arr = list(map(자료형, 리스트)) 이기때문에,
+리스트 자리에 input().split()으로 생성한 리스트가 들어갈수도, for문으로 str(i)하여 만든 리스트가 들어갈수도 있는것이다.
+
 <공백구분 리스트값 입력하기>
-for반복문 안에 n = list(map(int, input().split())) 이런것처럼 리스트를 map으로 생성하지 못한다.
+for반복문 안에 n = list(map(int, input().split())) 이런것처럼 리스트를 map으로 input()으로 입력받는걸 생성하지 못한다.
 그러니까 그냥 n = list(map(int, input().split())) 이렇게 단독으로 사용하자.
 
 <엔터구분 리스트값 입력하기>
@@ -40,14 +43,26 @@ while True:
         break
     print(a+b) 
 
-a.count(num)  // 리스트에서 특정 값인 num의 개수를 구함
-
 a = str(num)  // int형 num숫자를 문자열 형태로 변환함.
-
 arr = list(문자열)  // 문자열을 리스트로 변환함.
 
-a = set('apple')
-a  #{'e', 'l', 'a', 'p'}
+arr.count(num)  // 리스트에서 특정 값인 num의 개수를 구함
+arr.remove(num)  // 리스트에서 num값을 삭제함.
+
+arr = [i for i in range(10)]  // 0부터 9까지 숫자를 생성하여 리스트 생성
+a = list(range(3, 10))  // a를 출력하면 [3, 4, 5, 6, 7, 8, 9]
+
+세트 사용
+arr = set('apple')
+arr  #{'e', 'l', 'a', 'p'}
+
+set 끼리의 - 는 가능하기때문에,
+보통 삭제연산을 많이사용할때는 리스트의 remove를 사용하기보단
+세트끼리 뺄셈을 하여 결과값을 구하는 방식을 사용한다.
+
+리스트.sort()와 sorted(리스트)의 가장 큰 차이는
+리스트.sort() 는 본체의 리스트를 정렬해서 변환하는 것이고,
+sorted(리스트) 는 본체 리스트는 내버려두고, 정렬한 새로운 리스트를 반환하는 것이다.
 
 문자열로 이루어진 리스트가 있고, 각 리스트의 각 인덱스의 문자열에서 문자만 활용하고싶다면,
 가장 바깥쪽 for문에 input문장을 넣고, for문을 하나 더 중첩시키자.
@@ -60,4 +75,5 @@ for i in range(n):
           else:
                print("N")
 
-	
+파이썬 함수 만드는법: https://blockdmask.tistory.com/440
+파이썬 함수 전역변수 지역변수 다루는법: http://www.tcpschool.com/python2018/python_function_scope
