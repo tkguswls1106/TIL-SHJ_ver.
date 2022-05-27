@@ -1,0 +1,60 @@
+awt 소속의 Container 클래스로, 만들어져있는 frame 객체 위에 올려서 객체를 생성하면
+Container contentPane = frame.getContentPane();
+Container c = frame.getContentPane();
+이고, 
+JFrame 컨테이너 위에 Container 컨테이너가 올라가서,
+그 Container 컨테이너의 객체에 add로 JButton 컴포넌트 객체를 추가하면,
+Click이라는 버튼이 레이아웃에 꽉차게 나타난다.
+JButton b = new JButton("Click");
+c.add(b);
+
+처럼 JFrame 컨테이너 처럼 Container 컨테이너에도 똑같이 컴포넌트를 올리고 레이아웃 등등을 사용할 수 있다.
+예를들어
+Container contentPane = getContentPane();
+contentPane.setBackground(Color.ORANGE);
+contentPane.setLayout(new FlowLayout());
+contentPane.add(new JButton("OK"));
+
+클래스를 이벤트 인터페이스에 implements 해줄때, 이외의 나머지 추상메소드도 구현해주면 좋다.
+내부에
+public void mouseReleased(MouseEvent e) {}
+public void mouseClicked(MouseEvent e) {}
+...등등
+등등 처럼.
+대신, MouseAdapter 라는 이벤트 인터페이스에 implements 해주면, 위처럼 나머지 추상메소드를 굳이 더 구현해주지 않아도 된다.
+
+------------------------------------------------------------------------------------------
+
+import java.awt.*;
+import java.awt.event.MouseEvent;
+
+import javax.swing.*;
+
+public class Hello extends JFrame {
+	private JLabel la = new JLabel("Hello");
+
+	public Hello() {
+		setTitle("Mouse 이벤트 예제");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Container c = getContentPane();
+		c.addMouseListener(new MyMouseAdapter());
+		c.setLayout(null);
+		la.setSize(50, 20);
+		la.setLocation(30, 30);
+		c.add(la);
+		setSize(250, 250);
+		setVisible(true);
+	}
+
+	class MyMouseAdapter implements MouseAdapter {
+		public void mousePressed(MouseEvent e) {
+			int x = e.getX();
+			int y = e.getY();
+			la.setLocation(x, y);
+		}
+	}
+
+	public static void main(String[] args) {
+		new Hello();
+	}
+}
