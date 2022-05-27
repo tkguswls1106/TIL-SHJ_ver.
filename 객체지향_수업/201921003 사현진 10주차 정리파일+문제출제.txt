@@ -1,0 +1,43 @@
+문제 출제: 제한자중에서 protect의 특징을 설명하시오.
+
+-----------------------------------------------------------------------------------
+
+수업 중요내용 정리:
+
+public class Hello {
+	public static void main(String[] args) {
+		Parent p = new Parent();
+		Child c = new Child();
+		Parent p2 = new Child();  // 참조변수의 타입: Parent, 실제 인스턴스 타입: Child()
+		System.out.println("p.x = " + p.x);
+		System.out.println("p.x = " + c.x);
+		System.out.println("p.x = " + p2.x);  // 멤버변수가 중복정의된 경우, 참조변수의 타입에 따라 연결되는 멤버변수가 달라진다. (참조변수타입에 영향받음.) => p.x = 100 출력
+		p.method();
+		c.method();
+		p2.method();  // 메서드가 중복정의된 경우, 참조변수의 타입에 관계없이 항상 실제 인스턴스 타입에 정의된 메서드가 호출된다. (참조변수타입에 영향받지 않음.) => Child Method 출력
+	}
+}
+
+class Parent {
+	int x = 100;  // 멤버변수
+
+	void method() {  // 메서드
+		System.out.println("Parent Method");
+	}
+}
+
+class Child extends Parent {
+	int x = 200;  // 멤버변수
+
+	void method() {  // 메서드
+		System.out.println("Child Method");
+	}
+}
+
+- 출력 결과 -
+p.x = 100
+p.x = 200
+p.x = 100
+Parent Method
+Child Method
+Child Method
